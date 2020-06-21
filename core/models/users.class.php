@@ -26,7 +26,7 @@ class Users extends Main {
         if (empty($result))
             return false;
 
-        $cookie_time = time() + 60 * 2;
+        $cookie_time = time() + 60 * 60 * 24;
 
         $hash = md5('user_'. $result .'_givemeaccess');
 
@@ -44,8 +44,8 @@ class Users extends Main {
 
     public function logout() {
 
-        setcookie('user_id', '', time() - 3600*24*30*12, "/");
-        setcookie('user_hash', '', time() - 3600*24*30*12, "/", null, null, true);
+        setcookie('user_id', '', time() - 60 * 60 * 24, "/");
+        setcookie('user_hash', '', time() - 60 * 60 * 24, "/", null, null, true);
 
         return true;
     }
