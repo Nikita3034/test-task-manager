@@ -1,0 +1,44 @@
+.pagination {
+    float: right;
+}
+
+.pagination a {
+    color: #000;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: #17a2b8;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.btn-submit-task {
+    position: absolute;
+    bottom: 0px;
+}
+
+#tasks-list-filter {
+    min-height: 200px;
+}
+
+.sort-tasks-list {
+    cursor: pointer;
+}
+
+.sort-tasks-list i {
+    color: #17a2b8;
+}
+
+.center-block {
+    margin-left: auto;
+    margin-right: auto;
+}
