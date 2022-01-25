@@ -1,1 +1,3 @@
-404
+<div class="container">
+    404 not found
+</div>

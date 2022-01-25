@@ -6,14 +6,14 @@ jQuery(document).ready(function(){
 
         var form = jQuery(this);
 
-        var url = form.attr('action');
+        var action = form.attr('action');
 
         var method = form.attr('method');
 
         var data = form.serialize();
 
         jQuery.ajax({
-            url : url,
+            url : action,
             type : method,
             data : data,
             dataType : 'json',
@@ -70,7 +70,7 @@ jQuery(document).ready(function(){
     jQuery('body').on('click', '.btn-user-logout', function(e){
 
         jQuery.ajax({
-            url : '/users/logout',
+            url : '/api/auth/logout',
             type : 'POST',
             dataType : 'json',
             success : function( res ) {
@@ -101,10 +101,40 @@ jQuery(document).ready(function(){
         var id = _this.closest('tr').data('id');
 
         jQuery.ajax({
-            url : '/tasks/update',
+            url : '/api/task/update',
             type : 'POST',
             dataType : 'json',
             data: 'text=' + text + '&id=' + id + '&status=' + status,
+            success : function( res ) {
+
+                if (res) {
+
+                    alert('success');
+
+                    location.reload(true);
+
+                } else
+                    alert('error');
+            },
+            error : function ( jqXHR, textStatus, errorThrown ) {
+                alert('error');
+            }
+        });
+    });
+
+    jQuery('body').on('click', '.btn-delete-task-text', function(e){
+
+        e.preventDefault();
+
+        var _this = jQuery(this);
+
+        var id = _this.closest('tr').data('id');
+
+        jQuery.ajax({
+            url : '/api/task/delete',
+            type : 'POST',
+            dataType : 'json',
+            data: 'id=' + id,
             success : function( res ) {
 
                 if (res) {
