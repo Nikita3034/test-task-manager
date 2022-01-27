@@ -6,8 +6,6 @@ class UserModel extends Model
 {
     private $table_name = 'users';
 
-    const ADMIN_ROLE = 1;
-
     public static function init()
     {
         // database connected
@@ -32,13 +30,12 @@ class UserModel extends Model
 
     public function checkUserIsAdmin($id)
     {
-        $sql = "SELECT `id` FROM ?n WHERE `id` = ?i AND `role` = ?i";
+        $sql = "SELECT `id` FROM ?n WHERE `id` = ?i";
 
         return self::$db->getOne(
             $sql,
             $this->table_name,
-            $id,
-            self::ADMIN_ROLE
+            $id
         );
     }
 
