@@ -18,25 +18,21 @@ class UserModel extends Model
 
     public function getUserByLoginPass($login, $password)
     {
-        $sql = "SELECT * FROM ?n WHERE `login` = ?s AND `password` = ?s";
+        $sql = "SELECT `id` FROM ?n WHERE `login` = ?s AND `password` = ?s";
 
-        $test = self::$db->getOne($sql, $this->table_name, $login, $password);
-
-        return $test;
+        return self::$db->getOne($sql, $this->table_name, $login, $password);
     }
 
     public function getUserByIdHash($id, $hash)
     {
-        $sql = "SELECT * FROM ?n WHERE `ID` = ?i AND `hash` = ?s";
+        $sql = "SELECT `id` FROM ?n WHERE `id` = ?i AND `hash` = ?s";
 
-        $result = self::$db->getOne($sql, $this->table_name, $id, $hash);
-
-        return $result;
+        return self::$db->getOne($sql, $this->table_name, $id, $hash);
     }
 
     public function checkUserIsAdmin($id)
     {
-        $sql = "SELECT * FROM ?n WHERE `ID` = ?i AND `role` = ?i";
+        $sql = "SELECT `id` FROM ?n WHERE `id` = ?i AND `role` = ?i";
 
         return self::$db->getOne(
             $sql,
@@ -48,7 +44,7 @@ class UserModel extends Model
 
     public function removeHashUser($id)
     {
-        $sql = "UPDATE ?n SET ?u WHERE `ID` = ?i";
+        $sql = "UPDATE ?n SET ?u WHERE `id` = ?i";
 
         self::$db->query(
             $sql,
@@ -60,7 +56,7 @@ class UserModel extends Model
 
     public function updateHashUser($id, $hash)
     {
-        $sql = "UPDATE ?n SET ?u WHERE `ID` = ?i";
+        $sql = "UPDATE ?n SET ?u WHERE `id` = ?i";
 
         self::$db->query($sql, 'users', ['hash' => $hash], $id);
     }

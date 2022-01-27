@@ -2,7 +2,7 @@
 
     <div class="container">
         <div class="col-md-12 mt-4 text-right">
-            <button class="btn btn-danger btn-user-logout">Выход</button>
+            <button class="btn btn-danger btn-user-logout">Exit</button>
         </div>
     </div>
 
@@ -10,7 +10,7 @@
 
     <div class="container">
         <div class="col-md-12 mt-4 text-right">
-            <a href="/login" class="btn btn-success">Вход</a>
+            <a href="/login" class="btn btn-success">Login</a>
         </div>
     </div>
 

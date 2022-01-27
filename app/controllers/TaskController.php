@@ -5,8 +5,6 @@ namespace App\Controllers;
 use App\Controllers\MainController;
 use App\Controllers\UserController;
 use App\Models\TaskModel;
-use App\Models\TaskStatusModel;
-use App\Models\TaskEditModel;
 
 class TaskController
 {
@@ -40,7 +38,7 @@ class TaskController
     public function read(): array
     {
         $page = !empty($_GET['page']) ? $_GET['page'] : 0;
-        $sort = !empty($_GET['sort']) ? $_GET['sort'] : 'ID';
+        $sort = !empty($_GET['sort']) ? $_GET['sort'] : 'id';
         $order = !empty($_GET['order']) ? $_GET['order'] : 'DESC';
 
         $offset = $page * $this->limit;
@@ -55,13 +53,22 @@ class TaskController
      */
     public function create(): bool
     {
+        // data validation
+        if (
+            empty($_POST['name']) ||
+            empty($_POST['email']) ||
+            empty($_POST['text'])
+        ) {
+            return false;
+        }
+
+        // preparing data
         $data = [
             'name' => $this->clearString($_POST['name']),
             'email' => $this->clearString($_POST['email']),
             'text' => $this->clearString($_POST['text']),
-            'status' => TaskModel::DEFAULT_STATUS,
+            'status' => TaskModel::STATUS_NOT_DONE,
             'edit' => TaskModel::NOT_EDIT,
-            'delete' => TaskModel::NOT_DELETE
         ];
 
         TaskModel::init()->create($data);
@@ -80,13 +87,26 @@ class TaskController
             return false;
         }
 
-        $status = !empty($this->getStatuses()[$_POST['status']]) ? $_POST['status'] : TaskModel::DEFAULT_STATUS;
+        // data validation
+        if (
+            empty($_POST['id']) ||
+            empty($_POST['text'])
+        ) {
+            return false;
+        }
 
+        // preparing data
         $data = [
             'text' => $this->clearString($_POST['text']),
-            'status' => $status,
-            'edit' => TaskModel::IS_EDIT,
+            'status' => $_POST['status'] == 1 ? TaskModel::STATUS_DONE : TaskModel::STATUS_NOT_DONE,
         ];
+
+        $task = $this->getTaskById($_POST['id']);
+
+        // if text changed - task is edited by admin
+        if ($task['text'] != $_POST['text']) {
+            $data['edit'] = TaskModel::IS_EDIT;
+        }
 
         TaskModel::init()->update($_POST['id'], $data);
 
@@ -94,59 +114,18 @@ class TaskController
     }
 
     /**
-     * Delete task
+     * Get task by id
      *
-     * @return boolean
-     */
-    public function delete()
-    {
-        if (!$this->userController->isAdmin()) {
-            return false;
-        }
-
-        TaskModel::init()->update($_POST['id'], ['delete' => TaskModel::IS_DELETE]);
-
-        return true;
-    }
-
-    /**
-     * Get task statuses
-     *
+     * @param [type] $id
      * @return array
      */
-    public function getStatuses(): array
+    private function getTaskById($id): array
     {
-        $statuses = [];
-
-        $data = TaskStatusModel::init()->getStatuses();
-
-        foreach ($data as $item) {
-            $statuses[$item['ID']] = $item['name'];
-        }
-
-        return $statuses;
+        return TaskModel::init()->getTaskById($id);
     }
 
     /**
-     * Get task edit statuses
-     *
-     * @return array
-     */
-    public function getEdits(): array
-    {
-        $edits = [];
-
-        $data = TaskEditModel::init()->getEdits();
-
-        foreach ($data as $item) {
-            $edits[$item['ID']] = $item['name'];
-        }
-
-        return $edits;
-    }
-
-    /**
-     * Get count all not deleted tasks
+     * Get count all tasks
      *
      * @return integer
      */

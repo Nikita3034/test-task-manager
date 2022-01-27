@@ -1,5 +1,36 @@
-table th {
+.center-block {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-submit-task {
+    position: absolute;
+    bottom: 0px;
+}
+
+.sort-tasks-list {
+    cursor: pointer;
+}
+
+.sort-tasks-list i {
+    color: #17a2b8;
+}
+
+#tasks-list-filter table th {
     min-width: 100px;
+}
+
+#tasks-list-filter table .form-check-input {
+    margin-left: 0;
+}
+
+#tasks-list-filter table .form-check-label {
+    margin-left: 15px;
+}
+
+#tasks-list-filter table .btn-update-task-text {
+    width: 100px;
+    margin: 5px;
 }
 
 .pagination {
@@ -23,32 +54,4 @@ table th {
 .pagination a:hover:not(.active) {
     background-color: #ddd;
     cursor: pointer;
-}
-
-.btn-submit-task {
-    position: absolute;
-    bottom: 0px;
-}
-
-#tasks-list-filter {
-    min-height: 200px;
-}
-
-.sort-tasks-list {
-    cursor: pointer;
-}
-
-.sort-tasks-list i {
-    color: #17a2b8;
-}
-
-.center-block {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.btn-update-task-text,
-.btn-delete-task-text {
-    width: 100px;
-    margin: 5px;
 }

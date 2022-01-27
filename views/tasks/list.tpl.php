@@ -5,13 +5,13 @@ $tasks = self::$controller->read();
 ?>
 
 <div class="col-md-12 mt-4">
-    <h4>Список задач</h4>
+    <h4>Task list</h4>
 </div>
 
 <div class="col-md-12">
 
     <?php if (empty($tasks)) { ?>
-        <div>Задач нет</div>
+        <div>No tasks</div>
     <?php } else { ?>
         <form id="tasks-list-filter">
             <input type="hidden" name="page" value="<?= $_GET['page'] ?? '' ?>">
@@ -22,7 +22,7 @@ $tasks = self::$controller->read();
                 <thead>
                     <tr>
                         <th data-name="name">
-                            Имя 
+                            Username 
                             <a class="sort-tasks-list">
                                 <i class="fa fa-sort-<?= $_GET['order'] == 'ASC' && $_GET['sort'] == 'name' ? 'down' : 'up' ?>"></i>
                             </a>
@@ -34,16 +34,16 @@ $tasks = self::$controller->read();
                             </a>
                         </th>
                         <th>
-                            Текст 
+                            Text 
                         </th>
                         <th data-name="status">
-                            Статус 
+                            Status 
                             <a class="sort-tasks-list">
                                 <i class="fa fa-sort-<?= $_GET['order'] == 'ASC' && $_GET['sort'] == 'status' ? 'down' : 'up' ?>"></i>
                             </a>
                         </th>
                         <th>
-                            Отредактировано 
+                            Edited 
                         </th>
                         <?php if (self::$controller->userController->isAdmin()) { ?>
                             <th></th>
@@ -53,7 +53,7 @@ $tasks = self::$controller->read();
 
                 <tbody>
                     <?php foreach ($tasks as $key => $item) { ?>
-                        <tr data-id="<?= $item['ID'] ?>">
+                        <tr data-id="<?= $item['id'] ?>">
                             <td><?= $item['name'] ?></td>
                             <td><?= $item['email'] ?></td>
                             <td>
@@ -65,19 +65,24 @@ $tasks = self::$controller->read();
                             </td>
                             <td>
                                 <?php if (self::$controller->userController->isAdmin()) { ?>
-                                    <select class="btn-update-task-status" name="status">
-                                        <?php foreach (self::$controller->getStatuses() as $k => $i) { ?>
-                                            <option value="<?= $k ?>" <?= $item['status'] == $k ? 'selected' : ''?>><?= $i ?></option>
-                                        <?php } ?>
-                                    </select>
+                                    <input class="form-check-input" 
+                                        name="status"
+                                        type="checkbox" 
+                                        value="0" 
+                                        id="flexCheckDefault-<?=$key?>"
+                                        <?= $item['status'] == 1 ? 'checked' : ''?>>
+                                    <label class="form-check-label" for="flexCheckDefault-<?=$key?>">
+                                        <?= $item['status'] == 1 ? 'done' : 'not done'?>
+                                    </label>
                                 <?php } else { ?>
-                                    <?= self::$controller->getStatuses()[$item['status']] ?>
+                                    <?= $item['status'] == 1 ? 'done' : 'not done'?>
                                 <?php } ?>
-                            <td><?= self::$controller->getEdits()[$item['edit']] ?></td>
+                            <td>
+                                <?= $item['edit'] == 1 ? 'edited by admin' : 'not edited'?>
+                            </td>
                             <?php if (self::$controller->userController->isAdmin()) { ?>
                                 <td>
-                                    <button class="btn btn-info btn-update-task-text">Изменить</button>
-                                    <button class="btn btn-danger btn-delete-task-text">Удалить</button>
+                                    <button class="btn btn-info btn-update-task-text">Edit</button>
                                 </td>
                             <?php } ?>
                         </tr>

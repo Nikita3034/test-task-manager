@@ -6,9 +6,10 @@ class TaskModel extends Model
 {
     private $table_name = 'tasks';
 
-    const DEFAULT_STATUS = 1;
+    const STATUS_NOT_DONE = 0;
+    const STATUS_DONE = 1;
 
-    const NOT_EDIT = 2;
+    const NOT_EDIT = 0;
     const IS_EDIT = 1;
 
     const NOT_DELETE = 0;
@@ -24,14 +25,13 @@ class TaskModel extends Model
 
     public function getTasks($sort, $order, $offset, $limit)
     {
-        $sql = "SELECT * FROM ?n WHERE `delete` != ?i ?p LIMIT ?i,?i";
+        $sql = "SELECT * FROM ?n ?p LIMIT ?i,?i";
 
         $order_by = 'ORDER BY `'. $sort .'` '. $order;
 
         return self::$db->getAll(
             $sql,
             $this->table_name,
-            self::IS_DELETE,
             $order_by,
             $offset,
             $limit
@@ -40,9 +40,9 @@ class TaskModel extends Model
 
     public function getCountTasks()
     {
-        $sql = "SELECT COUNT(*) FROM ?n WHERE `delete` != ?i";
+        $sql = "SELECT COUNT(`id`) FROM ?n";
 
-        return self::$db->getOne($sql, $this->table_name, self::IS_DELETE);
+        return self::$db->getOne($sql, $this->table_name);
     }
 
     public function create($data)
@@ -54,8 +54,15 @@ class TaskModel extends Model
 
     public function update($id, $data)
     {
-        $sql = "UPDATE ?n SET ?u WHERE `ID` = ?i";
+        $sql = "UPDATE ?n SET ?u WHERE `id` = ?i";
 
         self::$db->query($sql, $this->table_name, $data, $id);
+    }
+
+    public function getTaskById($id)
+    {
+        $sql = "SELECT * FROM ?n WHERE `id` = ?s";
+
+        return self::$db->getRow($sql, $this->table_name, $id);
     }
 }

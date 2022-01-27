@@ -33,6 +33,14 @@ class AuthController
      */
     public function login(): bool
     {
+        // data validation
+        if (
+            empty($_POST['login']) ||
+            empty($_POST['password'])
+        ) {
+            return false;
+        }
+
         $login = $this->clearString($_POST['login']);
         $password = md5(md5($_POST['password'] .'_gimeaccess'));
 
@@ -61,6 +69,10 @@ class AuthController
      */
     public function logout(): bool
     {
+        if (empty($_COOKIE['user_id'])) {
+            return false;
+        }
+
         UserModel::init()->removeHashUser($_COOKIE['user_id']);
 
         setcookie('user_id', '', 0, "/");
@@ -76,7 +88,7 @@ class AuthController
      */
     public function isAuth(): bool
     {
-        if (isset($_COOKIE['user_id']) && isset($_COOKIE['user_hash'])) {
+        if (!empty($_COOKIE['user_id']) && !empty($_COOKIE['user_hash'])) {
 
             $result = UserModel::init()->getUserByIdHash($_COOKIE['user_id'], $_COOKIE['user_hash']);
 
