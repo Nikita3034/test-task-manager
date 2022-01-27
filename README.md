@@ -14,6 +14,16 @@
 
 ## Solution:
 
-### Appearance:
+### Used technologies:
+
+    php, js (jQuery), css, html
 
 ### Database structure:
+
+<img width="433" alt="Screenshot 2022-01-27 at 4 48 32 PM" src="https://user-images.githubusercontent.com/37295991/151371555-18f9cc72-1114-4f7f-bc96-d6ae13f49740.png">
+
+### Appearance:
+
+<img width="1112" alt="Screenshot 2022-01-27 at 4 32 17 PM" src="https://user-images.githubusercontent.com/37295991/151371651-a5236d58-9263-4aa1-914b-00f8554e94b6.png">
+
+<img width="1107" alt="Screenshot 2022-01-27 at 4 32 06 PM" src="https://user-images.githubusercontent.com/37295991/151371683-15c81c58-cab3-4329-995d-bda045f9178b.png">
