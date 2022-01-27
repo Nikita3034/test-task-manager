@@ -20,7 +20,7 @@
 
 ### Database structure:
 
-<img width="433" alt="Screenshot 2022-01-27 at 4 48 32 PM" src="https://user-images.githubusercontent.com/37295991/151371555-18f9cc72-1114-4f7f-bc96-d6ae13f49740.png">
+<img width="393" alt="Screenshot 2022-01-27 at 4 59 19 PM" src="https://user-images.githubusercontent.com/37295991/151373351-a0e30faa-d6c9-412d-bacc-bc1a49ec72e7.png">
 
 ### Appearance:
 
