@@ -27,3 +27,12 @@
 <img width="1112" alt="Screenshot 2022-01-27 at 4 32 17 PM" src="https://user-images.githubusercontent.com/37295991/151371651-a5236d58-9263-4aa1-914b-00f8554e94b6.png">
 
 <img width="1107" alt="Screenshot 2022-01-27 at 4 32 06 PM" src="https://user-images.githubusercontent.com/37295991/151371683-15c81c58-cab3-4329-995d-bda045f9178b.png">
+
+## Project development:
+
+- Clone this project
+- Clone docker build from `https://github.com/Nikita3034/docker-build` and follow the instructions
+- Go to the root of this project
+- `cp .env.example .env`
+- Create tables according to the presented structure
+- Add row in table `users` where  `login = admin` and `password = 123`
