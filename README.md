@@ -27,7 +27,7 @@
 ## Project development:
 
 - Clone this project
-- Clone docker build from `https://github.com/Nikita3034/docker-build` and follow the instructions
+- Clone docker build from [Docker build](https://github.com/Nikita3034/docker-build) and follow the instructions
 - Go to the root of this project
 - `cp .env.example .env`
 - Create tables according to the presented structure
