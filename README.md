@@ -36,4 +36,4 @@
 
 ## Used technologies:
 
-    php, js (jQuery), css, html
+    mysql, php, js (jQuery), css, html
