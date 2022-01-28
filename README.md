@@ -30,6 +30,7 @@
 - Clone docker build from [Docker build](https://github.com/Nikita3034/docker-build) and follow the instructions
 - Go to the root of this project
 - `cp .env.example .env`
+- Set base settings
 - Create tables according to the presented structure
 - Add row in table `users` where  `login = admin` and `password = 123`
 
