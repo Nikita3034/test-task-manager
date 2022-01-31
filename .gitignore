@@ -1,3 +1,4 @@
 .env
 .vscode
 xdebug.log
+.DS_Store
